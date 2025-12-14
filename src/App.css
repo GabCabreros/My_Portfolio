@@ -16,9 +16,15 @@ section {
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   section {
     padding: 60px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 40px 15px;
   }
 }
 

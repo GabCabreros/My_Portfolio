@@ -5,6 +5,14 @@
   padding: 4rem 2rem;
 }
 
+@media (max-width: 480px) {
+  .about {
+    margin: 1rem auto;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+}
+
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -18,6 +26,22 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
 }
 
 .section-subtitle {
@@ -118,6 +142,38 @@
 
   .about-stats {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-content {
+    gap: 2rem;
+  }
+  
+  .about-text p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .image-container {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .stat {
+    padding: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .stat-label {
+    font-size: 0.85rem;
+  }
+  
+  .about-stats {
+    gap: 1rem;
   }
 }
 

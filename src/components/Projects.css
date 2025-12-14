@@ -114,3 +114,36 @@
   }
 }
 
+@media (max-width: 480px) {
+  .projects {
+    margin: 1rem auto;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .projects-grid {
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .project-image {
+    height: 150px;
+  }
+  
+  .project-icon {
+    font-size: 3rem;
+  }
+  
+  .project-content {
+    padding: 1.25rem;
+  }
+  
+  .project-title {
+    font-size: 1.25rem;
+  }
+  
+  .project-description {
+    font-size: 0.9rem;
+  }
+}
+
