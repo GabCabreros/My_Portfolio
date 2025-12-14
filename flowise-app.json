@@ -1,0 +1,104 @@
+{
+  "name": "Portfolio Chatbot",
+  "description": "AI chatbot for personal portfolio website",
+  "version": "1.0.0",
+  "flows": [
+    {
+      "id": "portfolio-chatbot-flow",
+      "name": "Portfolio Chatbot Flow",
+      "description": "Main chatbot flow for portfolio website",
+      "nodes": [
+        {
+          "id": "start",
+          "type": "start",
+          "position": {
+            "x": 250,
+            "y": 250
+          },
+          "data": {
+            "label": "Start"
+          }
+        },
+        {
+          "id": "chatModel",
+          "type": "chatOpenAI",
+          "position": {
+            "x": 450,
+            "y": 250
+          },
+          "data": {
+            "label": "Chat Model",
+            "name": "ChatOpenAI",
+            "modelName": "gpt-3.5-turbo",
+            "temperature": 0.7,
+            "maxTokens": 500,
+            "topP": 1,
+            "frequencyPenalty": 0,
+            "presencePenalty": 0,
+            "timeout": 60000,
+            "basePath": "",
+            "streaming": true
+          }
+        },
+        {
+          "id": "promptTemplate",
+          "type": "promptTemplate",
+          "position": {
+            "x": 650,
+            "y": 250
+          },
+          "data": {
+            "label": "Prompt Template",
+            "name": "PromptTemplate",
+            "template": "You are a helpful AI assistant for a personal portfolio website. You help visitors learn about the portfolio owner's skills, projects, and experience. Be friendly, professional, and concise.\n\nUser question: {question}\n\nPlease provide a helpful response:",
+            "inputVariables": ["question"]
+          }
+        },
+        {
+          "id": "end",
+          "type": "end",
+          "position": {
+            "x": 850,
+            "y": 250
+          },
+          "data": {
+            "label": "End"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "start-chatModel",
+          "source": "start",
+          "target": "chatModel",
+          "sourceHandle": "output",
+          "targetHandle": "input"
+        },
+        {
+          "id": "chatModel-promptTemplate",
+          "source": "chatModel",
+          "target": "promptTemplate",
+          "sourceHandle": "output",
+          "targetHandle": "input"
+        },
+        {
+          "id": "promptTemplate-end",
+          "source": "promptTemplate",
+          "target": "end",
+          "sourceHandle": "output",
+          "targetHandle": "input"
+        }
+      ]
+    }
+  ],
+  "credentials": {
+    "openAIApiKey": "YOUR_OPENAI_API_KEY_HERE"
+  },
+  "settings": {
+    "port": 3000,
+    "host": "0.0.0.0",
+    "cors": true,
+    "allowedOrigins": ["*"]
+  }
+}
+
