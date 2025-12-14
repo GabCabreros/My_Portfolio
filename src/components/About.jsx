@@ -34,7 +34,7 @@ const About = () => {
         <div className="about-image">
           <div className="image-container">
             <img 
-              src="/images/b96234f4-ad8a-487c-9789-ef9473311231.jpg" 
+              src={`${import.meta.env.BASE_URL}images/b96234f4-ad8a-487c-9789-ef9473311231.jpg`}
               alt="Godwin Gabriel Cabreros" 
               className="profile-image"
             />
