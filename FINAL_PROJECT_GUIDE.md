@@ -28,6 +28,8 @@
 
 ### Step 1: Deploy Flowise to Cloud
 
+> **📋 For detailed step-by-step instructions, see `SETUP_CHECKLIST.md`**
+
 #### Option A: Railway (Recommended - Free Tier Available)
 1. Go to [railway.app](https://railway.app)
 2. Sign up with GitHub
@@ -52,11 +54,22 @@
 
 #### Option C: Flowise Cloud
 1. Go to [flowiseai.com](https://flowiseai.com)
-2. Sign up
-3. Create new flow
-4. Import `flowise-app.json`
-5. Configure API key
-6. Deploy and get API URL
+2. Sign up for an account
+3. **Create new flow**:
+   - After signing in, click "New Chatflow" or "Create Flow"
+   - Give it a name (e.g., "Portfolio Chatbot")
+   - You'll see the Flowise canvas/editor
+4. **Set up RAG components** (see Step 2 below for detailed RAG setup)
+5. **Import or configure**:
+   - You can manually add nodes (Document Loader, Vector Store, etc.)
+   - Or use the flowise-app.json as a reference for node configuration
+6. **Configure API key**:
+   - Add your OpenAI API key in the Chat Model node
+   - Set up authentication if needed
+7. **Save and deploy**:
+   - Click "Save" to save your flow
+   - Get your Flow ID from the URL or API section
+   - Your API URL will be: `https://flowiseai.com/api/v1/prediction/YOUR_FLOW_ID`
 
 ### Step 2: Set Up RAG with Knowledge Source
 
