@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import axios from 'axios'
 import './Chatbot.css'
 
 const Chatbot = ({ isOpen, onToggle }) => {
@@ -13,7 +14,10 @@ const Chatbot = ({ isOpen, onToggle }) => {
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
 
-  // Simple chatbot responses (works without Flowise)
+  // Flowise API URL - Set this after deploying Flowise
+  const FLOWISE_API_URL = import.meta.env.VITE_FLOWISE_API_URL || null
+
+  // Fallback chatbot responses (works without Flowise)
   const getBotResponse = (userMessage) => {
     const message = userMessage.toLowerCase()
     
@@ -83,7 +87,37 @@ const Chatbot = ({ isOpen, onToggle }) => {
     setInput('')
     setIsLoading(true)
 
-    // Simulate API delay for better UX
+    // Try Flowise API first, fallback to local responses
+    if (FLOWISE_API_URL) {
+      try {
+        const response = await axios.post(
+          FLOWISE_API_URL,
+          {
+            question: userMessage.content,
+            overrideConfig: {}
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            timeout: 30000 // 30 second timeout
+          }
+        )
+
+        const assistantMessage = {
+          role: 'assistant',
+          content: response.data.text || response.data.answer || response.data || 'I received your message, but the response format was unexpected.'
+        }
+        setMessages(prev => [...prev, assistantMessage])
+        setIsLoading(false)
+        return
+      } catch (error) {
+        console.error('Flowise API error:', error)
+        // Fall through to local responses if API fails
+      }
+    }
+
+    // Fallback to local responses if Flowise is not configured or fails
     setTimeout(() => {
       const botResponse = getBotResponse(userMessage.content)
       const assistantMessage = {
@@ -92,7 +126,7 @@ const Chatbot = ({ isOpen, onToggle }) => {
       }
       setMessages(prev => [...prev, assistantMessage])
       setIsLoading(false)
-    }, 500) // 500ms delay to simulate thinking
+    }, 500)
   }
 
   return (
